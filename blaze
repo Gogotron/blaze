@@ -6,14 +6,17 @@
 # Site: blaze.oat.sh
 #
 
-args=$1
-script=$2
+interpreter="$1"
+script="$2"
+
+shift $OPTIND; shift $OPTIND
+script_args="$@"
 
 
 if [ "$1" = "--upgrade" ]
 then
-    sudo wget https://raw.githubusercontent.com/Gogotron/blaze/master/blaze -q -O $(readlink -f $0)
-    sudo chmod +x $(readlink -f $0)
+    sudo wget https://raw.githubusercontent.com/Gogotron/blaze/master/blaze -q -O $(readlink -f "$0")
+    sudo chmod +x $(readlink -f "$0")
     echo "Blaze upgraded to latest"
     exit 0
 fi
@@ -22,12 +25,12 @@ file_extension=$(echo $script |awk -F . '{if (NF>1) {print $NF}}')
 
 if [ "$file_extension" = "md" ]
 then
-    awk '{ if (/^```/) { i++; next } if ( i % 2 == 1) { print } }'< $script > $script.out
-    $args $script.out
+    awk '{ if (/^```/) { i++; next } if ( i % 2 == 1) { print } }'< "$script" > "$script.code"
+    $interpreter "$script.code" $script_args
     exit_code=$?
-    rm $script.out
+    rm "$script.code"
 else
-    $args $script
+    $interpreter "$script" $script_args
     exit_code=$?
 fi
 exit $exit_code
