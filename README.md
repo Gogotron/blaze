@@ -2,7 +2,7 @@
 Download the script, put it somewhere on your `PATH`, and make it executable, eg:
 
 ```shell
-sudo curl http://blaze.oat.sh/blaze --output /usr/local/bin/blaze &&
+sudo curl https://raw.githubusercontent.com/Gogotron/blaze/master/blaze --output /usr/local/bin/blaze &&
 sudo chmod +x /usr/local/bin/blaze
 ```
 
