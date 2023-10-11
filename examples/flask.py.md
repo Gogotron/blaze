@@ -1,4 +1,4 @@
-#!blaze pex flask flask_restful --
+#!/usr/local/bin/blaze pex flask flask_restful --
 
 # Imports
 First the imports, this demo requires the `flask_restful` package.

@@ -1,4 +1,4 @@
-#!/usr/bin/blaze ruby
+#!/usr/bin/local/blaze ruby
 
 ```
 print "ohai"

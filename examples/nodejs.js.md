@@ -1,4 +1,4 @@
-#!/usr/bin/blaze node
+#!/usr/local/bin/blaze node
 
 ```
 console.log("Hello World");
