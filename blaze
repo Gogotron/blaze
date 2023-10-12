@@ -6,9 +6,6 @@
 # Site: blaze.oat.sh
 #
 
-interpreter="$1"
-script="$2"
-
 if [ "$1" = "--upgrade" ]
 then
     sudo wget https://raw.githubusercontent.com/Gogotron/blaze/master/blaze -q -O $(readlink -f "$0")
@@ -17,6 +14,8 @@ then
     exit 0
 fi
 
+interpreter="$1"
+script="$2"
 shift $OPTIND; shift $OPTIND
 script_args="$@"
 
