@@ -19,16 +19,8 @@ script="$2"
 shift $OPTIND; shift $OPTIND
 script_args="$@"
 
-file_extension=$(echo $script |awk -F . '{if (NF>1) {print $NF}}')
-
-if [ "$file_extension" = "md" ]
-then
-    awk '{ if (/^```/) { i++; next } if ( i % 2 == 1) { print } }'< "$script" > "$script.code"
-    $interpreter "$script.code" "$script_args"
-    exit_code=$?
-    rm "$script.code"
-else
-    $interpreter "$script" "$script_args"
-    exit_code=$?
-fi
+awk '{ if (/^```/) { i++; next } if ( i % 2 == 1) { print } }'< "$script" > "$script.code"
+$interpreter "$script.code" "$script_args"
+exit_code=$?
+rm "$script.code"
 exit $exit_code
