@@ -19,8 +19,10 @@ script="$2"
 shift $OPTIND; shift $OPTIND
 script_args="$@"
 
-awk '{ if (/^```/) { i++; next } if ( i % 2 == 1) { print } }'< "$script" > "$script.code"
-$interpreter "$script.code" "$script_args"
+id=$(cat /dev/urandom | base32 | head -c 5)
+
+awk '{ if (/^```/) { i++; next } if ( i % 2 == 1) { print } }'< "$script" > "$script.$id.code"
+$interpreter "$script.$id.code" "$script_args"
 exit_code=$?
-rm "$script.code"
+rm "$script.$id.code"
 exit $exit_code
